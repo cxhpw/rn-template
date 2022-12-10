@@ -36,7 +36,7 @@ function receivePosts(subreddit: string, json: any) {
 }
 
 function fetchPosts(subreddit: string) {
-  return (dispatch: any, getState) => {
+  return (dispatch: any) => {
     dispatch(requestPosts(subreddit));
     console.info('开始请求');
     return fetch(`http://192.168.1.110:86/api/reactjs`, {
@@ -46,22 +46,22 @@ function fetchPosts(subreddit: string) {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => {
+      .then(response => {
         // console.log('response', response);
         return response.json();
       })
-      .then((json) => {
+      .then(json => {
         // console.log(json);
         dispatch(receivePosts(subreddit, json));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error('请求失败', err);
         dispatch(invalidateSubreddit(subreddit));
       });
   };
 }
 
-function shouldFetchPosts(state, subreddit) {
+function shouldFetchPosts(state: any, subreddit: any) {
   const posts = state.postsBySubreddit[subreddit];
   if (!posts) {
     return true;
@@ -74,7 +74,7 @@ function shouldFetchPosts(state, subreddit) {
 
 export function fetchPostsIfNeeded(subreddit: string) {
   // 返回antion 对象， store
-  return (dispatch, getState) => {
+  return (dispatch: any, getState: any) => {
     if (shouldFetchPosts(getState(), subreddit)) {
       return dispatch(fetchPosts(subreddit));
     }
