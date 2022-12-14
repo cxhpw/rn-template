@@ -8,23 +8,18 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
-import {
-  Appearance,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
+import { useEffect } from 'react';
+import { Appearance } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { enableFreeze } from 'react-native-screens';
+import { useSafeState, useMemoizedFn } from 'ahooks';
 import store from '@/store';
-
-import {Provider} from 'react-redux';
-import {useSafeState, useMemoizedFn} from 'ahooks';
-
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-import {Test} from './components';
-import {useNetwork} from './hooks';
+import { useNetwork } from './hooks';
+import Stack from '@/stacks';
+enableFreeze();
 
 const App = () => {
   // 监听网络情况
@@ -38,38 +33,16 @@ const App = () => {
     const listener = Appearance.addChangeListener(themeChange);
     return () => listener.remove();
   });
-  const isDarkMode = theme === 'dark';
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
     <Provider store={store}>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
-          <Test />
-          <Header />
-          <View
-            style={{
-              backgroundColor: 'red',
-              height: 100,
-            }}>
-            <Text
-              style={{
-                color: '#000',
-                fontSize: 40,
-              }}>
-              123
-            </Text>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Stack />
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
     </Provider>
   );
 };
