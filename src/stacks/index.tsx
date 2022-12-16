@@ -1,11 +1,35 @@
 import {
   createNativeStackNavigator,
-  NativeStackScreenProps,
+  type NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import { View, Text, Button, Image } from 'react-native';
+import {
+  createBottomTabNavigator,
+  type BottomTabScreenProps,
+} from '@react-navigation/bottom-tabs';
+import { View, Text, Button, Image, Alert } from 'react-native';
+import {
+  useFocusEffect,
+  getFocusedRouteNameFromRoute,
+} from '@react-navigation/native';
+import { Container } from '@/components';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
+function getHeaderTitle(route) {
+  // If the focused route is not found, we need to assume it's the initial screen
+  // This can happen during if there hasn't been any navigation inside the screen
+  // In our case, it's "Feed" as that's the first screen inside the navigator
+  const routeName = getFocusedRouteNameFromRoute(route);
+  switch (routeName) {
+    case 'Two':
+      return 'News Two';
+    case 'Three':
+      return 'My Three';
+    default:
+      return routeName;
+  }
+}
 function LogoTitle() {
   return (
     <Image
@@ -15,21 +39,20 @@ function LogoTitle() {
   );
 }
 
-function HomeScreen({
-  route,
-  navigation,
-}: NativeStackScreenProps<{ Detail: undefined }>) {
+function OneScreen() {
   return (
-    <View
-      style={{
-        backgroundColor: '#f3f3f3',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Text style={{ color: 'red' }}>{route.name} Screen</Text>
+    <View>
+      <Text>OneScreen</Text>
+    </View>
+  );
+}
+
+function TwoScreen({ route, navigation }: BottomTabScreenProps<any>) {
+  return (
+    <View>
+      <Text>TwoScreen</Text>
       <Button
-        title="跳转"
+        title="click"
         onPress={() => {
           navigation.navigate('Detail');
         }}
@@ -38,63 +61,88 @@ function HomeScreen({
   );
 }
 
-function DetailsScreen({
-  route,
+function ThreeScreen({
   navigation,
-}: NativeStackScreenProps<{
-  Detail: {
-    id: number;
-  };
-}>) {
+}: NativeStackScreenProps<{ Four: undefined }>) {
+  return (
+    <Container hasHeader={false}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#000',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Text style={{ color: '#fff' }}>ThreeScreen</Text>
+        <Button
+          title="跳转"
+          onPress={() => {
+            navigation.navigate('Four');
+          }}
+        />
+        <Text style={{ color: '#fff' }}>sdasd</Text>
+      </View>
+    </Container>
+  );
+}
+
+function FourScreen({ navigation, route }: NativeStackScreenProps<any>) {
+  useFocusEffect(() => {
+    console.log(12);
+    navigation.addListener('beforeRemove', e => {
+      Alert.alert(
+        'Discard changes?',
+        'You have unsaved changes. Are you sure to discard them and leave the screen?',
+        [
+          { text: "Don't leave", style: 'cancel', onPress: () => {} },
+          {
+            text: 'Discard',
+            style: 'destructive',
+            // If the user confirmed, then we dispatch the action we blocked earlier
+            // This will continue the action that had triggered the removal of the screen
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ],
+      );
+    });
+  });
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>{route.name} Screen11ß</Text>
-      <Button
-        title="跳转"
-        onPress={() => {
-          navigation.push('Detail', {
-            id: 220,
-          });
-        }}
-      />
+      <Text>FourScreen</Text>
     </View>
+  );
+}
+
+function TabScreen() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Tab.Screen name="Two" component={TwoScreen} />
+      <Tab.Screen name="Three" component={ThreeScreen} />
+    </Tab.Navigator>
   );
 }
 
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerTitleAlign: 'center',
-        animationDuration: 400,
-        animation: 'slide_from_right',
-        gestureDirection: 'horizontal',
-        gestureEnabled: true,
-        headerStyle: {
-          backgroundColor: '#f4511e',
-        },
-        headerTintColor: '#fff',
-        statusBarColor: '#f4511e',
-        statusBarStyle: 'light',
-        headerBackTitleVisible: false,
+      screenOptions={({ route, navigation }) => {
+        console.log(navigation.getState());
+        return {
+          headerTitle: getHeaderTitle(route),
+          animation: 'slide_from_right',
+          headerTitleAlign: 'center',
+        };
       }}>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={() => {
-          return {
-            headerRight: () => {
-              return <Button title="Info" />;
-            },
-          };
-        }}
-      />
+      <Stack.Screen name="Home" component={TabScreen} />
       <Stack.Screen
         name="Detail"
-        component={DetailsScreen}
+        component={FourScreen}
         options={{
-          headerTitle: () => <LogoTitle />,
+          gestureEnabled: false,
+          headerLeft: () => <Button title="asd" />,
         }}
       />
     </Stack.Navigator>
