@@ -12,33 +12,50 @@ import { useEffect } from 'react';
 import { Appearance } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
+import { useFlipper } from '@react-navigation/devtools';
 import { Provider } from 'react-redux';
 import { enableFreeze } from 'react-native-screens';
+import { Fallback } from '@/components';
 import { useSafeState, useMemoizedFn } from 'ahooks';
-import store from '@/store';
 import { useNetwork } from './hooks';
+import { navigationRef } from '@/services/NavigationService';
+import { linking } from './linking';
 import Stack from '@/stacks';
+import store from '@/store';
+
 enableFreeze();
 
 const App = () => {
   // 监听网络情况
   useNetwork(store);
+
+  useFlipper(navigationRef);
+
   const [theme, setTheme] = useSafeState(Appearance.getColorScheme());
+
   const themeChange = useMemoizedFn(() => {
     setTheme(Appearance.getColorScheme());
   });
 
   useEffect(() => {
+    console.log('当前：', theme);
     const listener = Appearance.addChangeListener(themeChange);
     return () => listener.remove();
   });
-
   return (
     <Provider store={store}>
       <SafeAreaProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <NavigationContainer>
+          <NavigationContainer
+            ref={navigationRef}
+            theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+            fallback={<Fallback />}
+            linking={linking}>
             <Stack />
           </NavigationContainer>
         </GestureHandlerRootView>

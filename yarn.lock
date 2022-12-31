@@ -3658,6 +3658,11 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+dom-walk@^0.1.0:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"
+  integrity sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
+
 domexception@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/domexception/-/domexception-2.0.1.tgz#fb44aefba793e1574b0af6aed2801d057529f304"
@@ -4686,6 +4691,14 @@ global-prefix@^1.0.1:
     ini "^1.3.4"
     is-windows "^1.0.1"
     which "^1.2.14"
+
+global@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/global/-/global-4.4.0.tgz#3e7b105179006a323ed71aafca3e9c57a5cc6406"
+  integrity sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
+  dependencies:
+    min-document "^2.19.0"
+    process "^0.11.10"
 
 globals@^11.1.0:
   version "11.12.0"
@@ -6993,6 +7006,13 @@ mimic-fn@^4.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-4.0.0.tgz#60a90550d5cb0b239cca65d893b1a53b29871ecc"
   integrity sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==
 
+min-document@^2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
+  integrity sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==
+  dependencies:
+    dom-walk "^0.1.0"
+
 min-indent@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
@@ -8173,6 +8193,11 @@ react-native-exception-handler@^2.10.10:
   version "2.10.10"
   resolved "https://registry.yarnpkg.com/react-native-exception-handler/-/react-native-exception-handler-2.10.10.tgz#b6bfe2b7e6ea4a4deb1f518f48ce2ee1d4843497"
   integrity sha512-otAXGoZDl1689OoUJWN/rXxVbdoZ3xcmyF1uq/CsizdLwwyZqVGd6d+p/vbYvnF996FfEyAEBnHrdFxulTn51w==
+
+react-native-flipper@0.176.1:
+  version "0.176.1"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.176.1.tgz#fdf01e09160660d1c833d537909244965481275e"
+  integrity sha512-kioHzO9JzA2ReW9LfopIEUXeD6gDp3Mw6KjQbELvoLVIEMvCfGz59akezw4l/S8i6qkFVcnwh5c/7Z+L3nthQA==
 
 react-native-gesture-handler@^2.8.0:
   version "2.8.0"
