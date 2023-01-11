@@ -25,7 +25,17 @@ export { default as IconKuaidi } from './IconKuaidi';
 export { default as IconSousuoO } from './IconSousuoO';
 export { default as IconSousuo } from './IconSousuo';
 
-export type IconNames = 'jinggao' | 'warning' | 'right' | 'jindu' | 'yirenzheng' | 'youhuijuan' | 'didian' | 'kuaidi' | 'sousuo_o' | 'sousuo';
+export type IconNames =
+  | 'jinggao'
+  | 'warning'
+  | 'right'
+  | 'jindu'
+  | 'yirenzheng'
+  | 'youhuijuan'
+  | 'didian'
+  | 'kuaidi'
+  | 'sousuo_o'
+  | 'sousuo';
 
 interface Props extends GProps, ViewProps {
   name: IconNames;

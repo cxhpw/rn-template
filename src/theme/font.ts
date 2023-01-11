@@ -1,13 +1,13 @@
 /**
  * 此文件包含与字体相关的所有应用程序样式
  */
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 /**
  * @param Theme can be spread like {Colors, NavigationColors, Gutters, Layout, Common, ...args}
  * @return {*}
  */
-export default function ({FontSize, Colors}) {
+export default function ({ FontSize, Colors }) {
   return StyleSheet.create({
     textSmall: {
       fontSize: FontSize.small,
