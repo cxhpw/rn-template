@@ -2,10 +2,9 @@ import NetInfo, {
   NetInfoState,
   useNetInfo,
 } from '@react-native-community/netinfo';
-import {useMount, useUpdateEffect} from 'ahooks';
-import {setNetwork} from '@/actions/utils';
-import type {Store} from 'redux';
-
+import { useMount, useUpdateEffect } from 'ahooks';
+import { setNetwork } from '@/reducers/modules/utils';
+import type { Store } from '@reduxjs/toolkit';
 /** 是否联网 */
 export default function useNetwork(store: Store) {
   /** 已经包含了网络连接变化情况的监听事件 */

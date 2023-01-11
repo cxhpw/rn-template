@@ -1,20 +1,16 @@
-import {SET_NETWORK} from '@/actions/utils';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-/**
- * 是否联网
- */
-function isOnline(
-  state: boolean = false,
-  action: {type: string; payload: any},
-) {
-  switch (action.type) {
-    case SET_NETWORK:
+const isOnlineSlice = createSlice({
+  name: 'isOnline',
+  initialState: false,
+  reducers: {
+    setNetwork(state, action: PayloadAction<boolean>) {
       return action.payload;
-    default:
-      return state;
-  }
-}
+    },
+  },
+});
 
+export const { setNetwork } = isOnlineSlice.actions;
 export default {
-  isOnline,
+  isOnline: isOnlineSlice.reducer,
 };

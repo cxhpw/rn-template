@@ -1,15 +1,17 @@
 ﻿import rootReducer from '@/reducers';
 import {
-  legacy_createStore as createStore,
-  Store,
-  applyMiddleware,
+  configureStore,
+  type ThunkAction,
   type AnyAction,
-} from 'redux';
-// import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import thunkMiddleware from 'redux-thunk';
-
-function logger({getState}: any) {
+} from '@reduxjs/toolkit';
+function logger({ getState }: any) {
   return (next: any) => (action: AnyAction) => {
+    console.group('==================================\n');
+    console.log(
+      '%c state before',
+      'color: #28cd17; font-weight: bold',
+      getState(),
+    );
     console.log('%c will dispatch: ', 'color: red;font-weight: bold', action);
 
     let returnValue = next(action);
@@ -19,16 +21,24 @@ function logger({getState}: any) {
       'color: #28cd17;font-weight:bold',
       getState(),
     );
+    console.groupEnd();
 
     return returnValue;
   };
 }
-function configureStore(preloadedState: any = undefined): Store {
-  return createStore(
-    rootReducer,
-    preloadedState,
-    applyMiddleware(thunkMiddleware, logger),
-  );
-}
 
-export default configureStore();
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+});
+
+export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  AnyAction
+>;

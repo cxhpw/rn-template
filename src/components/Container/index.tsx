@@ -2,12 +2,11 @@ import type { PropsWithChildren } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const Container: React.FC<PropsWithChildren<{ hasHeader?: boolean }>> = ({
-  hasHeader = true,
-  children,
-}) => {
+const Container: React.FC<
+  PropsWithChildren<{ hasHeader?: boolean; backgroundColor?: string }>
+> = ({ hasHeader = true, children, backgroundColor }) => {
   const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#fff' },
+    container: { flex: 1, backgroundColor: backgroundColor || '#fff' },
   });
 
   return (
