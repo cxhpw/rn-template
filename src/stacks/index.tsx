@@ -5,7 +5,8 @@ import TabScreen from './tabStack';
 
 const Stack = createNativeStackNavigator();
 
-function getHeaderTitle(route) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getHeaderTitle(route: any) {
   // If the focused route is not found, we need to assume it's the initial screen
   // This can happen during if there hasn't been any navigation inside the screen
   // In our case, it's "Feed" as that's the first screen inside the navigator
@@ -34,7 +35,7 @@ export default () => {
   return (
     <Stack.Navigator
       initialRouteName="Tab"
-      screenOptions={({ route }) => {
+      screenOptions={() => {
         return {
           animation: 'slide_from_right',
           headerTitleAlign: 'center',
