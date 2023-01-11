@@ -1,11 +1,32 @@
-const a = ['a', 'b', 'c'] as const;
+interface Page<T> {
+  list?: Array<T>;
+  page?: number;
+  pageSize?: number;
+  total?: number;
+  totalPage?: number;
+}
 
-type B = typeof a[number];
+type UserInfo = {
+  userId?: number;
+  userName?: string;
+  profilePicture?: string;
+};
 
-const v = new Set(['1', '2', '3'] as const);
+interface Token {
+  accessToken?: string;
+  refreshToken?: string;
+  tokenExpireTime?: string;
+  tokenExpiresIn?: number;
+  userId?: number;
+  ispassword?: boolean;
+}
 
-type V = Parameters<typeof v.add>[number];
+interface AjaxResponse<T = any> {
+  code: number;
+  success: boolean;
+  message: string;
+  data: T;
+}
 
-const vv: V = '1';
-
-console.log(vv);
+type Obj = Record<string, any>;
+Footer;
