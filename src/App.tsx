@@ -21,10 +21,11 @@ import { useFlipper } from '@react-navigation/devtools';
 import { Provider } from 'react-redux';
 import { enableFreeze } from 'react-native-screens';
 import { Fallback } from '@/components';
-import { useSafeState, useMemoizedFn } from 'ahooks';
+import { useSafeState, useMemoizedFn, useMount } from 'ahooks';
 import { useNetwork } from './hooks';
 import { navigationRef } from '@/services/NavigationService';
 import { linking } from './linking';
+import { hide as hideSplash } from 'react-native-bootsplash';
 import Stack from '@/stacks';
 import store from '@/store';
 
@@ -35,6 +36,16 @@ const App = () => {
   useNetwork(store);
 
   useFlipper(navigationRef);
+
+  useMount(() => {
+    const init = async () => {
+      // …do multiple sync or async tasks
+    };
+    init().finally(async () => {
+      await hideSplash({ fade: true });
+      console.log('Bootsplash has been hidden successfully');
+    });
+  });
 
   const [theme, setTheme] = useSafeState(Appearance.getColorScheme());
 

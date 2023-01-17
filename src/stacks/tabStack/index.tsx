@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from '@/components';
-import Home from '@/pages/home';
-import My from '@/pages/my';
+import Home from '@/screens/home';
+import My from '@/screens/my';
 import helper from '@/helper';
 import { IconNames } from '@/components/Icon';
 import { Text } from 'react-native';
