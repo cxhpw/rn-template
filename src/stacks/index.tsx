@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Text, Button } from 'react-native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import TabScreen from './tabStack';
 
@@ -23,14 +22,6 @@ function getHeaderTitle(route: any) {
   }
 }
 
-function FourScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>FourScreen</Text>
-    </View>
-  );
-}
-
 export default () => {
   return (
     <Stack.Navigator
@@ -47,12 +38,12 @@ export default () => {
       <Stack.Group
         screenOptions={{
           presentation: 'card',
-          headerShown: false,
+          headerShown: true,
         }}>
         <Stack.Screen name="Tab" component={TabScreen} />
       </Stack.Group>
       <Stack.Group>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Detail"
           component={FourScreen}
           options={({ navigation }) => {
@@ -74,7 +65,7 @@ export default () => {
               },
             };
           }}
-        />
+        /> */}
       </Stack.Group>
     </Stack.Navigator>
   );

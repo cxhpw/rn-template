@@ -11,3 +11,8 @@
 
 # react-native-svg
 -keep public class com.horcrux.svg.** {*;}
+
+# react-native-reanimated
+-keep class com.swmansion.reanimated.** {*;}
+-keep class com.facebook.react.turbomodule.** {*;}
+

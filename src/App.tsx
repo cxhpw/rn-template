@@ -41,9 +41,8 @@ const App = () => {
     const init = async () => {
       // …do multiple sync or async tasks
     };
-    init().finally(async () => {
-      await hideSplash({ fade: true });
-      console.log('Bootsplash has been hidden successfully');
+    init().finally(() => {
+      hideSplash({ fade: true });
     });
   });
 
