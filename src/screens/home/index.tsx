@@ -16,13 +16,4 @@ const Index: React.FC<Props> = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  ball: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'blue',
-    borderRadius: 100,
-  },
-});
-
 export default Index;

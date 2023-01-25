@@ -29,4 +29,3 @@ interface AjaxResponse<T = any> {
 }
 
 type Obj = Record<string, any>;
-Footer;
