@@ -24,7 +24,7 @@ const basePalette = {
   func700: 'transparent',
   func800: 'transparent',
   func900: 'transparent',
-} as const;
+};
 // 默认调色板
 const palette = {
   ...basePalette,
@@ -50,7 +50,7 @@ const palette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
-} as const;
+};
 const lightTheme = createTheme({
   spacing: {
     x0: 0,
@@ -228,7 +228,7 @@ const darkPalette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
-} as const;
+};
 
 const darkTheme = {
   ...lightTheme,
