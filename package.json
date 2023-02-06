@@ -24,6 +24,7 @@
     "@react-navigation/native-stack": "^6.9.6",
     "@reduxjs/toolkit": "^1.9.1",
     "@shopify/react-native-skia": "^0.1.172",
+    "@shopify/restyle": "^2.3.0",
     "ahooks": "^3.7.2",
     "echarts": "^5.4.1",
     "global": "^4.4.0",
