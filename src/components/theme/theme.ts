@@ -76,6 +76,7 @@ const lightTheme = createTheme({
     text_active: palette.white,
     primary_text: palette.black,
     primary_background: palette.white,
+    spacerColor: palette.gray50,
   },
   borderRadii: {
     x0: 0,
@@ -243,6 +244,7 @@ const darkTheme = {
     text_active: darkPalette.white,
     primary_text: palette.white,
     primary_background: palette.black,
+    spacerColor: darkPalette.gray100,
   },
   theme: 'dark',
 };
@@ -252,3 +254,4 @@ export default {
   darkTheme,
 };
 export type Theme = typeof lightTheme;
+export type Spacing = keyof Theme['spacing'];

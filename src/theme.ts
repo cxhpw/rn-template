@@ -3,7 +3,7 @@
  * 自定义主题
  *
  */
-import theme from '@/components/theme/theme';
+import theme from '@/components/Theme/theme';
 
 export const lightTheme = {
   ...theme.lightTheme,
