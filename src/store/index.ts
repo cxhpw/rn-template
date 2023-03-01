@@ -1,44 +1,28 @@
-﻿import rootReducer from '@/reducers';
-import {
-  configureStore,
-  type ThunkAction,
-  type AnyAction,
-} from '@reduxjs/toolkit';
-function logger({ getState }: any) {
-  return (next: any) => (action: AnyAction) => {
-    console.group('==================================\n');
-    console.log(
-      '%c state before',
-      'color: #28cd17; font-weight: bold',
-      getState(),
+﻿import { create, StateCreator } from 'zustand';
+import { createisOnlineSlice, isOnlineSlice } from '@/slice/utils';
+
+type Slices = isOnlineSlice;
+type Create = StateCreator<Slices>;
+
+const log = (_create: Create): StateCreator<Slices> => {
+  return (set, get, api) => {
+    return _create(
+      args => {
+        const str = Object.keys(args)[0] as keyof Slices & string;
+        console.group(`状态${str}状态发生了改变\n`);
+        console.log('prev state', str in get() ? get()[str] : null);
+        set(args);
+        console.log('new state', get()[str]);
+        console.groupEnd();
+      },
+      get,
+      api,
     );
-    console.log('%c will dispatch: ', 'color: red;font-weight: bold', action);
-
-    let returnValue = next(action);
-
-    console.log(
-      '%c state after dispath',
-      'color: #28cd17;font-weight:bold',
-      getState(),
-    );
-    console.groupEnd();
-
-    return returnValue;
   };
-}
+};
 
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
-});
-
-export default store;
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  AnyAction
->;
+export const useStore = create<Slices>(
+  log((...args) => ({
+    ...createisOnlineSlice(...args),
+  })),
+);

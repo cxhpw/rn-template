@@ -18,7 +18,6 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 import { useFlipper } from '@react-navigation/devtools';
-import { Provider } from 'react-redux';
 import { enableFreeze } from 'react-native-screens';
 import { Fallback } from '@/components';
 import { useSafeState, useMemoizedFn, useMount } from 'ahooks';
@@ -27,13 +26,12 @@ import { navigationRef } from '@/services/NavigationService';
 import { linking } from './linking';
 import { hide as hideSplash } from 'react-native-bootsplash';
 import Stack from '@/stacks';
-import store from '@/store';
 
 enableFreeze();
 
 const App = () => {
   // 监听网络情况
-  useNetwork(store);
+  useNetwork();
 
   useFlipper(navigationRef);
 
@@ -58,19 +56,17 @@ const App = () => {
     return () => listener.remove();
   });
   return (
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <NavigationContainer
-            ref={navigationRef}
-            theme={theme === 'dark' ? DarkTheme : DefaultTheme}
-            fallback={<Fallback />}
-            linking={linking}>
-            <Stack />
-          </NavigationContainer>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </Provider>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer
+          ref={navigationRef}
+          theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+          fallback={<Fallback />}
+          linking={linking}>
+          <Stack />
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 };
 
