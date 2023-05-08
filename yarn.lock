@@ -2018,6 +2018,11 @@
   dependencies:
     nanoid "^3.1.23"
 
+"@sdcx/keyboard-insets@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@sdcx/keyboard-insets/-/keyboard-insets-0.1.0.tgz#752de2cf2415146aac2e53e39116023ada102337"
+  integrity sha512-qWIFJZYKw4ucPbqWWG1jFIquvOsaflPJejoRtfdATNwy0RGcCv1zsdHGAZy9XbDADvztNt9+IDSPdEs632xPag==
+
 "@shopify/flash-list@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@shopify/flash-list/-/flash-list-1.4.1.tgz#145ae2527ecec008789401db5f20cdfbbc495523"
