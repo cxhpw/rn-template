@@ -7,6 +7,7 @@
     "android:staging": "cd ./android && cross-env ENVFILE=.env.staging ./gradlew app:assembleRelease",
     "android:prod": "cd ./android && cross-env ENVFILE=.env.prod ./gradlew app:assembleRelease",
     "ios": "react-native run-ios",
+    "ios:build": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/main.jsbundle  --assets-dest ios",
     "start": "watchman watch-del-all && react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
