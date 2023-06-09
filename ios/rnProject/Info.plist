@@ -31,6 +31,7 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(VERSION_CODE)</string>
+	<!-- 配置外部schemes -->
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel</string>
@@ -40,8 +41,13 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<!-- 允许应用程序在 WebView 中加载任意网络资源 -->
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+		<!-- 允许加载任意网络资源，包括非安全的 HTTP 连接 -->
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<!-- 指定哪些域名可以使用非安全的 HTTP 连接 -->
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
@@ -53,6 +59,7 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<!-- 引导页 -->
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash.storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -61,6 +68,7 @@
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string></string>
+	<!-- 禁止横屏 -->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -69,5 +77,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<!-- 热更新 -->
+	<key>CodePushDeploymentKey</key>
+	<string>$(CODEPUSH_KEY_IOS)</string>
 </dict>
+
 </plist>

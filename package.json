@@ -14,7 +14,7 @@
     "commit": "git-cz",
     "tsc": "tsc -p tsconfig.json",
     "pod": "cd ios && pod install --verbose --no-repo-update && cd ..",
-    "postinstall": "npx husky install",
+    "postinstall": "npx husky install && npx patch-package",
     "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts}\"",
     "clean": "react-native-clean-project",
     "svg-init": "npx iconfont-rn"
@@ -37,6 +37,7 @@
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-bootsplash": "^4.4.1",
+    "react-native-code-push": "^8.0.2",
     "react-native-config": "^1.4.11",
     "react-native-exception-handler": "^2.10.10",
     "react-native-gesture-handler": "^2.8.0",
@@ -81,7 +82,7 @@
     "metro-react-native-babel-preset": "0.72.3",
     "npm": "^9.2.0",
     "react-native-clean-project": "^4.0.1",
-    "react-native-flipper": "0.176.1",
+    "react-native-flipper": "0.164.0",
     "react-native-iconfont-cli": "^2.2.4",
     "react-test-renderer": "18.1.0",
     "typescript": "^4.8.3"
